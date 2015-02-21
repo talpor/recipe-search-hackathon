@@ -19,7 +19,9 @@ MASS_UNITS = (
     ('tsp', 'teaspoon'),
     ('tbsp', 'tablespoon'),
     ('cup', 'cup'),
+    ('scp', 'scoop'),
     ('pch', 'pinch'),
+    ('dsh', 'dash'),
 )
 
 UNITS = (
@@ -46,7 +48,7 @@ class Ingredient(models.Model):
 class IngredientEntry(models.Model):
     ingredient = models.ForeignKey('Ingredient')
     unit = models.CharField(choices=MASS_UNITS, max_length=16)
-    quantity = models.PositiveSmallIntegerField(default=0)
+    quantity = models.FloatField(default=0)
 
     def __unicode__(self):
         return "%s %s %s" % (self.ingredient.name, self.quantity, self.unit)
@@ -54,10 +56,20 @@ class IngredientEntry(models.Model):
 
 class Recipe(models.Model):
     name = models.CharField(max_length=128, unique=True)
+    categories = models.ManyToManyField('Category')
+    description = models.TextField(null=True)
     ingredients = models.ManyToManyField('IngredientEntry')
     time = models.PositiveSmallIntegerField(null=True)
     instructions = JSONField(null=True)
     notes = JSONField(null=True)
+
+    def __unicode__(self):
+        return "%s" % self.name
+
+
+class Category(models.Model):
+    name = models.CharField(max_length=128, unique=True)
+    description = models.TextField(null=True)
 
     def __unicode__(self):
         return "%s" % self.name
