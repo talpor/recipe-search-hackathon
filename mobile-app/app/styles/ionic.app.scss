@@ -1,0 +1,51 @@
+// Ionic overrides
+@import "ionic.app/variables";
+
+// Include all of Ionic
+@import "../bower_components/ionic/scss/ionic";
+
+/* Media Queries
+---------------------------- */
+// hdpi
+// @media (-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi) {
+// }
+
+// xhdpi/retina
+// @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+// }
+
+/* Ionic styles
+---------------------------- */
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+  text-align: center;
+}
+
+/* _type.scss */
+// transform from retina to mdpi
+h1, .h1 { font-size: 2.07em; }  // ~29px en mdpi
+h2, .h2 { font-size: 1.36em; }  // ~19px en mdpi
+h3, .h3 { font-size: 1.14em; }  // ~16px en mdpi
+h4, .h4 { font-size: 1.00em; }  // ~14px en mdpi
+h5, .h5 { font-size: 0.9em; }   // ~12.5px en mdpi
+h6, .h6 { font-size: 0.71em; }  // ~10px en mdpi
+
+.button.button-blend{
+  $opacity: 0.5;
+  background-color: rgba($button-default-bg, $opacity);
+  &.button-light { background-color: rgba($button-light-bg, $opacity); }
+  &.button-stable { background-color: rgba($button-stable-bg, $opacity); }
+  &.button-positive { background-color: rgba($button-positive-bg, $opacity); }
+  &.button-calm { background-color: rgba($button-calm-bg, $opacity); }
+  &.button-assertive { background-color: rgba($button-assertive-bg, $opacity); }
+  &.button-balanced { background-color: rgba($button-balanced-bg, $opacity); }
+  &.button-energized { background-color: rgba($button-energized-bg, $opacity); }
+  &.button-royal { background-color: rgba($button-royal-bg, $opacity); }
+  &.button-dark { background-color: rgba($button-dark-bg, $opacity); }
+}
+
+.item-stacked-label input,
+.item-stacked-label textarea {
+  @include border-radius(0);
+  padding-left: 25px;
+  padding-top: 20px;
+}

@@ -1,0 +1,20 @@
+<!-- The title of the ion-view will be shown on the navbar -->
+<ion-view title="Recipe Search">
+  <ion-content has-bouncing="false">
+    <div></div>
+    <div class="item item-input-inset row ingredient-search">
+      <label class="item-input-wrapper col-80">
+        <input type="text" placeholder="Type in ingredient name"/>
+      </label>
+      <a class="ion-plus-circled col-offset-10"></a>
+    </div>
+    <ion-list>
+      <ion-item ng-repeat="ingredient in selected_ingredients">
+        <h2>{{ ingredient.name }}</h2>
+        <ion-option-button class="ion-minus-circled"
+                           ng-click="delete(ingredient)">
+        </ion-option-button>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>

@@ -1,0 +1,18 @@
+{
+  "settings": {
+    "ENV": {
+      "name": "production"
+    },
+    "facebook": {
+      "appID": "352720821561578"
+    },
+    "apiEndpoint": {
+      "url": "https://api.gotcrowdy.com"
+    },
+    "wsService": {
+      "url": "https://api.gotcrowdy.com/ws",
+      "pingUmbral": 100,
+      "queryFrequency": 10000
+    }
+  }
+}
