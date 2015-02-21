@@ -36,3 +36,6 @@ django-avatar==2.0
 pytz==2014.10
 
 # Your custom requirements go here
+
+djangorestframework==3.0.5
+jsonfield==1.0.2
