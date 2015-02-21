@@ -1,0 +1,77 @@
+org/
+
+# Python bytecode:
+*.py[co]
+
+# Packaging files:
+*.egg*
+
+# Sphinx docs:
+build
+
+# SQLite3 database files:
+*.db
+
+# Logs:
+*.log
+server/logs/*
+
+#Sass
+\.sass-cache
+
+# Sublime
+cw.sublime-project
+cw.sublime-workspace
+
+# Linux Editors
+*~
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+.elc
+auto-save-list
+tramp
+.\#*
+*.swp
+*.swo
+*.sublime-project
+*.sublime-workspace
+.env
+recipe-search/static/Gruntfile.js
+
+# Mac
+.DS_Store
+._*
+
+#css dir
+recipe-search/static/css
+
+#sass cache
+recipe-search/static/.sass-cache/
+
+#sass generated images
+recipe-search/static/images/*/generated/*
+recipe-search/static/images/generated/
+
+#node components
+recipe-search/static/node_modules/
+
+#bower components
+recipe-search/static/bower_components/
+
+#Django local settings
+recipe-search/recipe-search/settings/local.py
+
+# Assets
+assets/
+
+# Static dist
+recipe-search/static/dist/
+
+# Testing
+.coverage
+tests/cover/
+
+
+# Recipe-Search scss env var
+recipe-search/static/scss/_common.scss
