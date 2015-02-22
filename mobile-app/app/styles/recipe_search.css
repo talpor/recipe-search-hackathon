@@ -1,0 +1,32 @@
+.bar-footer {
+    display: block;
+    height: auto;
+    padding: 0;
+}
+
+.time_tabs {
+    text-align: center;
+}
+
+
+.time-tab-title {
+    font-size: 2.5em;
+    color: #FF9800;
+    margin-bottom: 5px;
+}
+
+.time-tab-text {
+    color: #9E9E9E;
+}
+
+#buttons_row, #random_col, #search_col {
+    padding: 0;
+}
+
+#buttons_row {
+    margin-top: 5px;
+}
+
+.action_button {
+    margin: 0 !important;
+}
