@@ -1,0 +1,18 @@
+{
+  "settings": {
+    "ENV": {
+      "name": "staging"
+    },
+    "facebook": {
+      "appID": "355959317904395"
+    },
+    "apiEndpoint": {
+      "url": "https://api.gotcrowdy.com"
+    },
+    "wsService": {
+      "url": "https://api.gotcrowdy.com/ws",
+      "pingUmbral": 100,
+      "queryFrequency": 10000
+    }
+  }
+}

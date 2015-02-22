@@ -1,0 +1,18 @@
+{
+  "settings": {
+    "ENV": {
+      "name": "development"
+    },
+    "facebook": {
+      "appID": "352723474894646"
+    },
+    "apiEndpoint": {
+      "url": "http://localhost:8000"
+    },
+    "wsService": {
+      "url": "http://localhost:9999/ws",
+      "pingUmbral": 10,
+      "queryFrequency": 10000
+    }
+  }
+}

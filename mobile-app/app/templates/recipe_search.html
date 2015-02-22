@@ -1,0 +1,39 @@
+<!-- The title of the ion-view will be shown on the navbar -->
+<ion-view title="Recipe Search">
+  <ion-content has-bouncing="false" class="has-header">
+    <div></div>
+    <div class="item item-input-inset row ingredient-search">
+      <span class="col-80">Available Ingredients</span>
+      <a class="ion-plus-circled col-offset-10" ng-click="showModal()"></a>
+    </div>
+    <ion-list>
+      <ion-item ng-repeat="ingredient in selectedIngredients">
+        {{ ingredient.name }}
+        <ion-option-button class="ion-minus-circled"
+                           ng-click="deleteIngredient(ingredient)">
+        </ion-option-button>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>
+
+<script id="ingredient-modal.html" type="text/ng-template">
+  <div class="modal">
+    <ion-header-bar class="bar-positive">
+      <h1 class="title">Add Ingredient</h1>
+    </ion-header-bar>
+    <ion-content has-bouncing="false">
+      <div class="list">
+        <label class="item-input-wrapper">
+          <i class="icon ion-ios7-search placeholder-icon"></i>
+          <input type="search" class="search-box" placeholder="Search" ng-model="searchTerm">
+        </label>
+      </div>
+      <ion-list>
+        <ion-item ng-repeat="ingredient in allIngredients | filter:searchTerm | filter:notSelected" ng-click="addIngredient(ingredient)">
+          {{ ingredient.name }}
+        </ion-item>
+      </ion-list>
+    </ion-content>
+  </div>
+</script>

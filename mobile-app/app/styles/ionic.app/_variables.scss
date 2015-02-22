@@ -1,0 +1,90 @@
+// Custom mixins
+
+/* dpi_ratios */
+/*
+  ldpi    ==>  120 dpi  ==>  .75
+  mdpi    ==>  160 dpi  ==>  1.0  (baseline)
+  hdpi    ==>  240 dpi  ==>  1.5
+  xhdpi   ==>  320 dpi  ==>  2.0
+  xxhdpi  ==>  480 dpi  ==>  3.0
+  xxxhdpi ==>  640 dpi  ==>  4.0
+*/
+@function density_transform($px, $to_density:160, $from_density:320){
+  @return $px * ($to_density / $from_density);
+}
+
+
+// The path for our ionicons font files, relative to the built CSS in www/css
+$ionicons-font-path: "../fonts" !default;
+
+/* App overrides
+------------------- */
+$base-color: #fff;
+$balanced: #4cd964;
+$assertive: #d94c4c;
+$positive: #3b5998;
+$dark: #221f1f;
+$calm: #3CAAC6;
+
+$default-bar-height: 44px;
+$default-bar-padding: 22px;
+
+$bar-height:                      $default-bar-height + 2*$default-bar-padding !default;
+$bar-title-font-size:             30px !default;
+// $bar-transparency:                0 !default;
+$bar-padding-portrait:            $default-bar-padding !default;
+$bar-padding-landscape:           $default-bar-padding !default;
+$bar-default-bg:                  transparent !default;
+$bar-default-border:              transparent !default;
+
+$button-bar-button-font-size:     18px !default;
+// $button-border-width:             0px !default;
+$button-border-radius:            0px !default;
+
+$button-large-height:             37.5px;  // mdpi
+$button-large-font-size:          15px;  // mdpi
+$button-large-padding:            24px;  // mdpi
+
+$button-dark-bg:                  rgba($dark, .7);
+$button-dark-border:              $button-dark-bg;
+
+$button-calm-text:                #fff;
+
+$item-padding:                    12px !default;
+$item-default-border:             transparent;
+
+$menu-bg:                         $dark !default;
+
+$font-family-base: 'Source-Sans-Pro', 'Trebuchet MS', Helvetica, sans-serif !default;
+
+// toggle
+$toggle-width: 27.5px;  // mdpi
+$toggle-height: 20px;  // mdpi
+$toggle-border-width: 0;
+$toggle-border-radius: 0;
+
+$toggle-handle-width: $toggle-width;
+$toggle-handle-height: $toggle-height;
+$toggle-handle-radius: 0;
+
+$toggle-off-bg-color: $assertive;
+$toggle-off-border-color: $assertive;
+$toggle-on-default-bg: $balanced;
+
+$toggle-handle-off-bg-color: transparent;
+$toggle-handle-on-bg-color: transparent;
+
+$toggle-off-label: "Off";
+$toggle-on-label: "On";
+
+// $toggle-transition-duration:      .2s !default;
+$toggle-hit-area-expansion: 0px;
+
+// inputs
+$input-label-color: white;
+// $input-border: $item-light-border;
+
+
+// popup
+$popup-background-color:          rgba($dark,0.9) !default;
+$popup-button-min-height:         25px !default;

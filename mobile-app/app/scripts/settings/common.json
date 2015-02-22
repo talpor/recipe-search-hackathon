@@ -1,0 +1,28 @@
+{
+  "settings": {
+    "auth": {
+      "timeout": 25000
+    },
+    "chant": {
+      "duration": 5000
+    },
+    "spinner": {
+      "lines": "7",
+      "length": "0",
+      "width": "6",
+      "radius": "8",
+      "corners": "1",
+      "rotate": "0",
+      "direction": "1",
+      "color": "#fff",
+      "speed": "1.5",
+      "trail": "52",
+      "shadow": "false",
+      "hwaccel": "true",
+      "className": "spinner",
+      "zIndex": "2e9",
+      "top": "0%",
+      "left": "0%"
+    }
+  }
+}

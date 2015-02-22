@@ -1,0 +1,56 @@
+To install the project:
+
+  - install nodejs/npm and run `npm install`
+  - install bower (`npm install -g bower`)* and run `bower install`
+  - install cordova-cli (`npm install -g cordova`) *
+  - install bundler (`gem install bundler`) and run `bundle install`
+  - ensure you have the config.xml file and 'www', 'platforms' folders
+  - install grunt-cli (`npm install -g grunt-cli`)
+
+  # ANDROID
+    - donwload and uncompress the android sdk
+    - add `export PATH=${PATH}:path/to/sdk/platform-tools:path/to/sdk/tools` to your .bashrc or .zshrc
+    - download android platforms running `android sdk` and selecting the desired platforms (19)
+    - run `android avd` and create a virtual device
+    - run `grunt platform:add:android` (in case of error try `cordova platform add android`)
+
+  # IOS
+    - run `cordova platform add ios`
+
+
+  - install cordova plugins running foreach plugin `cordova plugin add <plugin_id>`.
+      The plugins to install are:
+        * org.apache.cordova.statusbar
+        * org.apache.cordova.console
+        * org.apache.cordova.device
+        * org.apache.cordova.splashscreen
+  - install tha facebookconnect plugin:
+    + On android:
+        * cordova -d plugin add https://github.com/phonegap/phonegap-facebook-plugin.git --variable APP_ID="355959317904395" --variable APP_NAME="Crowdy"
+        * mv platforms/android/com.phonegap.plugins.facebookconnect/FacebookLib platforms/android/FacebookLib
+        * rm platforms/android/com.phonegap.plugins.facebookconnect/
+        * Your platforms/android/project.properties should look like:
+                target=android-19
+                android.library.reference.1=CordovaLib
+                android.library.reference.2=com.phonegap.plugins.facebookconnect/FacebookLib
+          Replace "android.library.reference.2=com.phonegap.plugins.facebookconnect/FacebookLib"
+          for "android.library.reference.2=FacebookLib"
+        * run `android update project --subprojects --path "platforms/android" --target android-19 --library "CordovaLib"`
+        * run `android update project --subprojects --path "platforms/android" --target android-19 --library "FacebookLib"`
+        * run `cd platforms/android/ && ant clean`
+        * run `cd FacebookLib && ant clean`
+        * edit AndroidManifest.xml in the current path and set "minSdkVersion" and "targetSdkVersion":
+            <uses-sdk android:minSdkVersion="14" android:targetSdkVersion="19" />
+        * run `ant release`
+    + On iOS **:
+        * cordova -d plugin add https://github.com/phonegap/phonegap-facebook-plugin.git --variable APP_ID="355959317904395" --variable APP_NAME="Crowdy"
+
+  - run `cordova restore plugins --experimental` to restore plugins preferences
+  - run `cd ../../..`
+  - run `grunt build`
+
+
+
+Notes:
+* could install these packages locally and prefix commands with the local instalation path
+** Installing facebookConnectPlugin in iOS can be painfull. (https://github.com/Wizcorp/phonegap-facebook-plugin/issues/603)
