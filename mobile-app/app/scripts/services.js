@@ -3,16 +3,35 @@
 /* global facebookConnectPlugin, _, SockJS, localNotification, angular */
 
 angular.module('RecipeSearch.services', ['settings'])
-  .factory('Ingredients', ['$http', function($http) {
-      var ingredientsUrl = '/ingredients/';
-      var queryIngredients = function(params){
-          return $http.get(ingredientsUrl, {'apiRequest': true,
-                                            'params': params});
-      };
-      return {
-          query: queryIngredients
-      };
-  }]);
+  .factory(
+      'Ingredients',
+      ['$http', '$q', '$timeout',
+       function($http, $q, $timeout) {
+           var ingredientsUrl = '/ingredients/';
+           var queryIngredients = function(params){
+               return $http.get(ingredientsUrl, {'apiRequest': true,
+                                                 'params': params});
+           };
+           var getAllIngredients = function(){
+               var deferred = $q.defer();
+
+               $timeout( function(){
+                   deferred.resolve([
+                       { name: 'Paprika' },
+                       { name: 'Black Pepper' },
+                       { name: 'White Rice' },
+                   ]);
+               }, 1500);
+
+               return deferred.promise;
+           };
+
+           return {
+               query: queryIngredients,
+               getAll: getAllIngredients
+           };
+       }]
+  );
 
 /**
  * Utilities for localstorage, notifications and popups
