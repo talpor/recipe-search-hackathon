@@ -1,7 +1,6 @@
 <!-- The title of the ion-view will be shown on the navbar -->
 <ion-view title="Recipe Search">
   <ion-content has-bouncing="false">
-    <div></div>
     <div class="item item-input-inset row ingredient-search">
       <label class="item-input-wrapper col-80">
         <input type="text" placeholder="Type in ingredient name"/>
@@ -17,23 +16,57 @@
       </ion-item>
     </ion-list>
   </ion-content>
-  <ion-footer-bar align-title="middle" class="bar-assertive">
-    <ion-tabs class="tabs-positive tabs-icon-top">
-      <ion-tab title="15m to 30m" icon-on="ion-ios7-clock" icon-off="ion-ios7-clock-outline">
-      <!-- Tab 1 content -->
-      </ion-tab>
-      <ion-tab title="30m to 1h" icon-on="ion-ios7-clock" icon-off="ion-ios7-clock-outline">
-      <!-- Tab 2 content -->
-      </ion-tab>
-      <ion-tab title="1h to 2h" icon-on="ion-ios7-clock" icon-off="ion-ios7-clock-outline">
-      <!-- Tab 3 content -->
-      </ion-tab>
-      <ion-tab title="2h to 4h" icon-on="ion-ios7-clock" icon-off="ion-ios7-clock-outline">
-      <!-- Tab 4 content -->
-      </ion-tab>
-      <ion-tab title="4h+" icon-on="ion-ios7-clock" icon-off="ion-ios7-clock-outline">
-      <!-- Tab 5 content -->
-      </ion-tab>
-    </ion-tabs>
+  <ion-footer-bar align-title="left" class="bar-footer">
+    <h3 class="time-tab-text">How much time do you have?</h3>
+    <div class="row time_tabs">
+        <div class="col-20">
+          <div class="time-tab-title">
+            <i class="icon ion-clock"></i>
+          </div>
+          <div class="time-tab-text">
+            15m to 30m
+          </div>
+        </div>
+        <div class="col-20">
+          <div class="time-tab-title">
+            <i class="icon ion-clock"></i>
+          </div>
+          <div class="time-tab-text">
+            30m to 1h
+          </div>
+        </div>
+        <div class="col-20">
+          <div class="time-tab-title">
+            <i class="icon ion-clock"></i>
+          </div>
+          <div class="time-tab-text">
+            1h to 2h
+          </div>
+        </div>
+        <div class="col-20">
+          <div class="time-tab-title">
+            <i class="icon ion-clock"></i>
+          </div>
+          <div class="time-tab-text">
+            2h to 4h
+          </div>
+        </div>
+        <div class="col-20">
+          <div class="time-tab-title">
+            <i class="icon ion-clock"></i>
+          </div>
+          <div class="time-tab-text">
+            Forever!
+          </div>
+        </div>
+      </div>
+      <div id="buttons_row" class="row">
+        <div id="random_col" class="col">
+          <button class="action_button button button-block button-positive">Random</button>
+        </div>
+        <div id="search_col" class="col">
+          <button class="action_button button button-block">Search</button>
+        </div>
+      </div>
   </ion-footer-bar>
 </ion-view>
