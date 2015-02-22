@@ -1,0 +1,14 @@
+<!-- The title of the ion-view will be shown on the navbar -->
+<ion-view title="Search Results">
+  <ion-content has-bouncing="false" class="has-header">
+    <ion-list class="recipe-list">
+      <a href="#/recipe/{{recipe.id}}" class="item item-thumbnail-left" ng-repeat="recipe in recipes">
+        <img src="{{ recipe.thumbnail }}"/>
+        <h2>{{ recipe.name }}</h2>
+        <rating ng-model="recipe.rating" max="5"></rating>
+        <p ng-if="recipe.cook_time">Cook Time: {{ recipe.cook_time }}</p>
+        <p ng-if="recipe.prep_time">Prep Time: {{ recipe.prep_time }}</p>
+      </a>
+    </ion-list>
+  </ion-content>
+</ion-view>

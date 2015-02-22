@@ -13,6 +13,7 @@
 
     <!-- build:css({.tmp,app}) styles/ionic.app.css -->
     <link rel="stylesheet" href="styles/ionic.app.css" />
+    <link rel="stylesheet" href="bower_components/ionic-rating/ionic-rating.css" />
     <!-- endbuild -->
 
     <!-- build:css({.tmp,app}) styles/main.css -->
@@ -24,6 +25,8 @@
   <body ng-app="RecipeSearch">
     <!-- where the initial view template will be rendered -->
     <ion-nav-bar class="bar-positive">
+      <ion-nav-back-button class="button-icon ion-arrow-left-c">
+      </ion-nav-back-button>
     </ion-nav-bar>
     <ion-nav-view animation="slide-left-right" class="wrapper"></ion-nav-view>
 
@@ -36,6 +39,7 @@
     <script src="bower_components/collide/collide.js"></script>
     <script src="bower_components/ionic/release/js/ionic.js"></script>
     <script src="bower_components/ionic/release/js/ionic-angular.js"></script>
+    <script src="bower_components/ionic-rating/ionic-rating.js"></script>
     <script src="bower_components/lodash/dist/lodash.compat.js"></script>
     <!-- endbower -->
     <!-- endbuild -->

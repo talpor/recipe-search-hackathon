@@ -3,6 +3,7 @@
   "version": "0.1",
   "dependencies": {
     "ionic": "v1.0.0-beta.11",
+    "ionic-rating": "0.0.2",
     "lodash": "~2.4.1"
   },
   "overrides": {

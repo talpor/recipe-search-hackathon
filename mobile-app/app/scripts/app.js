@@ -49,6 +49,11 @@
           url: '/recipe/search/',
           templateUrl: 'templates/recipe_search.html',
           controller: 'SearchRecipeCtrl'
+      })
+      .state('search-results', {
+          url: '/recipe/search-results/',
+          templateUrl: 'templates/search_results.html',
+          controller: 'SearchResultsCtrl'
       });
 
     // if none of the above states are matched, use this as the fallback

@@ -2,7 +2,7 @@
 
 /* global angular, _ */
 
-angular.module('RecipeSearch.controllers', ['RecipeSearch.services'])
+angular.module('RecipeSearch.controllers', ['RecipeSearch.services', 'ionic.rating'])
   .controller('AppCtrl', [
     '$ionicPlatform',
     '$rootScope',
@@ -26,8 +26,8 @@ angular.module('RecipeSearch.controllers', ['RecipeSearch.services'])
   ])
     .controller(
         'SearchRecipeCtrl',
-        ['$scope','$ionicLoading', '$ionicModal', 'Ingredients',
-         function($scope, $ionicLoading, $ionicModal, Ingredients){
+        ['$scope','$state', '$ionicLoading', '$ionicModal', 'Ingredients', 'Search',
+         function($scope, $state, $ionicLoading, $ionicModal, Ingredients, Search){
              $scope.loadingIndicator = $ionicLoading.show({
 	         content: 'Loading Ingredients',
 	         animation: 'fade-in',
@@ -35,6 +35,7 @@ angular.module('RecipeSearch.controllers', ['RecipeSearch.services'])
 	     });
 
              $scope.allIngredients = [];
+             $scope.availableTime = 4;
              $scope.ingredientsData = [];
              $scope.selectedIngredients = [];
              $scope.searchTerm = '';
@@ -74,5 +75,30 @@ angular.module('RecipeSearch.controllers', ['RecipeSearch.services'])
              $scope.deleteIngredient = function(ingredient){
                  _.pull($scope.selectedIngredients, ingredient);
              };
+
+             $scope.showSearchResults = function(){
+                 Search.setSearchParameters($scope.selectedIngredients,
+                                            $scope.availableTime);
+                 $state.go('search-results');
+             };
+         }]
+    )
+    .controller(
+        'SearchResultsCtrl',
+        ['$scope', '$ionicLoading', 'Search',
+         function($scope, $ionicLoading, Search){
+             $scope.loadingIndicator = $ionicLoading.show({
+	         content: 'Loading Results',
+	         animation: 'fade-in',
+	         showBackdrop: true,
+	     });
+
+             $scope.recipes = [];
+             Search.getSearchResults().then(
+                 function(recipes){
+                     $scope.recipes = recipes;
+                     $ionicLoading.hide();
+                 }
+             );
          }]
     );

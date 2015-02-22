@@ -1,5 +1,5 @@
 <!-- The title of the ion-view will be shown on the navbar -->
-<ion-view title="Recipe Search">
+<ion-view title="Recipe Search" hide-back-button="true">
   <ion-content has-bouncing="false" class="has-header">
     <div class="item item-input-inset row ingredient-search">
       <span class="col-80">Available Ingredients</span>
@@ -65,7 +65,7 @@
           <button class="action_button button button-block button-positive">Random</button>
         </div>
         <div id="search_col" class="col">
-          <button class="action_button button button-block">Search</button>
+          <button class="action_button button button-block" ng-click="showSearchResults()">Search</button>
         </div>
       </div>
   </ion-footer-bar>
