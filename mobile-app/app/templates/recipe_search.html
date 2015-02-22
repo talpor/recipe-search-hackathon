@@ -1,7 +1,6 @@
 <!-- The title of the ion-view will be shown on the navbar -->
 <ion-view title="Recipe Search">
   <ion-content has-bouncing="false" class="has-header">
-    <div></div>
     <div class="item item-input-inset row ingredient-search">
       <span class="col-80">Available Ingredients</span>
       <a class="ion-plus-circled col-offset-10" ng-click="showModal()"></a>
@@ -15,6 +14,61 @@
       </ion-item>
     </ion-list>
   </ion-content>
+  <ion-footer-bar align-title="left" class="bar-footer">
+    <div class="row item">
+      <span class="col">How much time do you have?</span>
+    </div>
+    <div class="row time_tabs">
+        <ion-radio ng-model="availableTime" ng-value="0" class="col-20">
+          <div class="time-tab-title">
+            <i class="icon ion-clock"></i>
+          </div>
+          <div class="time-option-label">
+            15m to 30m
+          </div>
+        </ion-radio>
+        <ion-radio ng-model="availableTime" ng-value="1" class="col-20">
+          <div class="time-tab-title">
+            <i class="icon ion-clock"></i>
+          </div>
+          <div class="time-option-label">
+            30m to 1h
+          </div>
+        </ion-radio>
+        <ion-radio ng-model="availableTime" ng-value="2" class="col-20">
+          <div class="time-tab-title">
+            <i class="icon ion-clock"></i>
+          </div>
+          <div class="time-option-label">
+            1h to 2h
+          </div>
+        </ion-radio>
+        <ion-radio ng-model="availableTime" ng-value="3" class="col-20">
+          <div class="time-tab-title">
+            <i class="icon ion-clock"></i>
+          </div>
+          <div class="time-option-label">
+            2h to 4h
+          </div>
+        </ion-radio>
+        <ion-radio ng-model="availableTime" ng-value="4" class="col-20">
+          <div class="time-tab-title">
+            <i class="icon ion-clock"></i>
+          </div>
+          <div class="time-option-label">
+            Forever!
+          </div>
+        </ion-radio>
+      </div>
+      <div id="buttons_row" class="row">
+        <div id="random_col" class="col">
+          <button class="action_button button button-block button-positive">Random</button>
+        </div>
+        <div id="search_col" class="col">
+          <button class="action_button button button-block">Search</button>
+        </div>
+      </div>
+  </ion-footer-bar>
 </ion-view>
 
 <script id="ingredient-modal.html" type="text/ng-template">
