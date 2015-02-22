@@ -76,3 +76,6 @@ tests/cover/
 
 # Recipe-Search scss env var
 recipe-search/static/scss/_common.scss
+
+# uploads
+uploads/
