@@ -60,7 +60,8 @@ class Recipe(models.Model):
     categories = models.ManyToManyField('Category')
     description = models.TextField(null=True)
     ingredients = models.ManyToManyField('IngredientEntry')
-    time = models.PositiveSmallIntegerField(null=True)
+    prep_time = models.PositiveSmallIntegerField(null=True)
+    cook_time = models.PositiveSmallIntegerField(null=True)
     instructions = JSONField(null=True)
     notes = JSONField(null=True)
 

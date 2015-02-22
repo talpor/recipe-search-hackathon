@@ -3,6 +3,8 @@ from rest_framework.filters import SearchFilter
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
+from django.db.models import Q, F
+
 from models import Recipe, Ingredient
 
 
@@ -50,14 +52,29 @@ class RecipeSearchIngTimeViewSet(APIView):
     serializer_class = RecipeSerializer
 
     def get(self, request, format=None):
+        
+        # Get parameters
         params = request.query_params
         ingredients = [int(i) for i in params.getlist('ings')]
-        time = params.get('time')
+        prep_time = params.get('prep_time')
+        cook_time = params.get('cook_time')
 
-        ret = self.queryset
-        ret = ret.filter(ingredients__ingredient__in=ingredients)
+        recipes = self.queryset
 
-        if time:
-            ret = ret.filter(time__lte=time)
+        # Filter by ingredients
+        recipes = recipes.filter(ingredients__ingredient__in=ingredients)            
 
-        return Response(self.serializer_class(ret, many=True).data)
+        if prep_time:
+            recipes = recipes.filter(prep_time__lte=prep_time)
+        if cook_time:
+            recipes = recipes.filter(cook_time__lte=cook_time)
+
+        # Weed out the recipes that require at least one
+        # ingredient not in the list
+        for r in recipes:
+            for i in r.ingredients.all():
+                if i.ingredient.pk not in ingredients:
+                    recipes = recipes.exclude(pk=r.pk)
+                    break
+
+        return Response(self.serializer_class(recipes, many=True).data)
