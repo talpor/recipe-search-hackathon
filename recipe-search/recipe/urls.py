@@ -16,6 +16,13 @@ recipe_list = RecipeViewSet.as_view({
 })
 
 
+recipe_detail = RecipeViewSet.as_view({
+    'get': 'retrieve',
+    'put': 'update',
+    'delete': 'destroy',
+})
+
+
 ingredient_list = IngredientViewSet.as_view({
     'get': 'list',
     'post': 'create',
@@ -32,6 +39,9 @@ ingredient_detail = IngredientViewSet.as_view({
 urlpatterns = patterns('',
     url(r'^', include(router.urls)),
     url(r'^recipes/$', recipe_list, name="all-recipes"),
+    url(r'^recipes/(?P<pk>[0-9]+)/$', recipe_detail,
+        name="detail-recipe"),
     url(r'^ingredients/$', ingredient_detail, name="all-ingredients"),
-    url(r'^ingredients/(?P<pk>[0-9]+)/$', ingredient_detail, name="detail-ingredients"),
+    url(r'^ingredients/(?P<pk>[0-9]+)/$', ingredient_detail,
+        name="detail-ingredients"),
 )
