@@ -5,7 +5,8 @@ from django.conf.urls import patterns, url, include
 
 from rest_framework.routers import DefaultRouter
 
-from serializers import RecipeViewSet, IngredientViewSet
+from serializers import RecipeViewSet, IngredientViewSet, \
+    RecipeSearchIngTimeViewSet
 
 router = DefaultRouter()
 router.register('recipes', RecipeViewSet)
@@ -22,6 +23,7 @@ recipe_detail = RecipeViewSet.as_view({
     'delete': 'destroy',
 })
 
+recipe_search_ingtime = RecipeSearchIngTimeViewSet.as_view()
 
 ingredient_list = IngredientViewSet.as_view({
     'get': 'list',
@@ -37,11 +39,11 @@ ingredient_detail = IngredientViewSet.as_view({
 
 
 urlpatterns = patterns('',
+    # Home
     url(r'^', include(router.urls)),
-    url(r'^recipes/$', recipe_list, name="all-recipes"),
-    url(r'^recipes/(?P<pk>[0-9]+)/$', recipe_detail,
-        name="detail-recipe"),
-    url(r'^ingredients/$', ingredient_detail, name="all-ingredients"),
-    url(r'^ingredients/(?P<pk>[0-9]+)/$', ingredient_detail,
-        name="detail-ingredients"),
+
+    # Recipe search by ingredients and time
+    url(r'^recipes/search/ingredient_time/$', recipe_search_ingtime,
+        name="recipe-search-ingtime"),
+
 )
