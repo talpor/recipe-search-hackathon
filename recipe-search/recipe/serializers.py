@@ -20,6 +20,6 @@ class RecipeSerializer(serializers.ModelSerializer):
         depth = 2
 
 
-class RecipeViewSet(viewsets.ReadOnlyModelViewSet):
+class RecipeViewSet(viewsets.ModelViewSet):
     queryset = Recipe.objects.all()
     serializer_class = RecipeSerializer

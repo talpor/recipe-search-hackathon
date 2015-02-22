@@ -49,7 +49,7 @@ class Ingredient(models.Model):
 class IngredientEntry(models.Model):
     ingredient = models.ForeignKey('Ingredient')
     unit = models.CharField(max_length=16)
-    quantity = models.CharField(max_length = 16, default='')
+    quantity = models.CharField(max_length=16, default='')
 
     def __unicode__(self):
         return "%s %s %s" % (self.ingredient.name, self.quantity, self.unit)
