@@ -16,7 +16,7 @@ def parse_ingredients(text):
 
     for l in text.splitlines():
         p_quant='\d?(¾|½|¼|⅓|⅔|⅕|⅖|⅗|⅘|\d)'
-        p_unit='oz|dash|dashes|ounce'
+        p_unit='oz|dash|dashes|ounce|part|parts'
         p_ing='\[\[([a-zA-Z\d\s\'\áéíóúÁÉÍÓÚ]+)\]\]'
 
         m = re.search(p_quant, l)

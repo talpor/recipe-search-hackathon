@@ -22,6 +22,7 @@ MASS_UNITS = (
     ('scp', 'scoop'),
     ('pch', 'pinch'),
     ('dsh', 'dash'),
+    ('prt', 'part'),
 )
 
 UNITS = (
@@ -47,7 +48,7 @@ class Ingredient(models.Model):
 
 class IngredientEntry(models.Model):
     ingredient = models.ForeignKey('Ingredient')
-    unit = models.CharField(choices=MASS_UNITS, max_length=16)
+    unit = models.CharField(max_length=16)
     quantity = models.CharField(max_length = 16, default='')
 
     def __unicode__(self):

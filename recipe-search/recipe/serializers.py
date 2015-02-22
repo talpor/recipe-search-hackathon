@@ -17,7 +17,7 @@ class IngredientViewSet(viewsets.ModelViewSet):
 class RecipeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Recipe
-        depth = 1
+        depth = 2
 
 
 class RecipeViewSet(viewsets.ReadOnlyModelViewSet):
