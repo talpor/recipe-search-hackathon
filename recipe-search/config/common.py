@@ -68,6 +68,11 @@ class Common(Configuration):
     )
     # END MIDDLEWARE CONFIGURATION
 
+    # REST Framework config
+    REST_FRAMEWORK = {
+        'PAGINATE_BY': 100
+    }
+
     # MIGRATIONS CONFIGURATION
     MIGRATION_MODULES = {
         'sites': 'contrib.sites.migrations'
