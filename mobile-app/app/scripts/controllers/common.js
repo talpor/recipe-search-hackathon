@@ -67,6 +67,7 @@ angular.module('RecipeSearch.controllers', ['RecipeSearch.services'])
 
              $scope.addIngredient = function(ingredient){
                  $scope.selectedIngredients.push(ingredient);
+                 $scope.searchTerm = '';
                  $scope.modal.hide();
              };
 
