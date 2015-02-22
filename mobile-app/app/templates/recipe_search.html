@@ -15,48 +15,50 @@
     </ion-list>
   </ion-content>
   <ion-footer-bar align-title="left" class="bar-footer">
-    <h3 class="time-tab-text">How much time do you have?</h3>
+    <div class="row item">
+      <span class="col">How much time do you have?</span>
+    </div>
     <div class="row time_tabs">
-        <div class="col-20">
+        <ion-radio ng-model="availableTime" ng-value="0" class="col-20">
           <div class="time-tab-title">
             <i class="icon ion-clock"></i>
           </div>
-          <div class="time-tab-text">
+          <div class="time-option-label">
             15m to 30m
           </div>
-        </div>
-        <div class="col-20">
+        </ion-radio>
+        <ion-radio ng-model="availableTime" ng-value="1" class="col-20">
           <div class="time-tab-title">
             <i class="icon ion-clock"></i>
           </div>
-          <div class="time-tab-text">
+          <div class="time-option-label">
             30m to 1h
           </div>
-        </div>
-        <div class="col-20">
+        </ion-radio>
+        <ion-radio ng-model="availableTime" ng-value="2" class="col-20">
           <div class="time-tab-title">
             <i class="icon ion-clock"></i>
           </div>
-          <div class="time-tab-text">
+          <div class="time-option-label">
             1h to 2h
           </div>
-        </div>
-        <div class="col-20">
+        </ion-radio>
+        <ion-radio ng-model="availableTime" ng-value="3" class="col-20">
           <div class="time-tab-title">
             <i class="icon ion-clock"></i>
           </div>
-          <div class="time-tab-text">
+          <div class="time-option-label">
             2h to 4h
           </div>
-        </div>
-        <div class="col-20">
+        </ion-radio>
+        <ion-radio ng-model="availableTime" ng-value="4" class="col-20">
           <div class="time-tab-title">
             <i class="icon ion-clock"></i>
           </div>
-          <div class="time-tab-text">
+          <div class="time-option-label">
             Forever!
           </div>
-        </div>
+        </ion-radio>
       </div>
       <div id="buttons_row" class="row">
         <div id="random_col" class="col">
