@@ -31,6 +31,84 @@ angular.module('RecipeSearch.services', ['settings'])
                getAll: getAllIngredients
            };
        }]
+  )
+    .factory('Search',
+      ['$http', '$q', '$timeout',
+       function($http, $q, $timeout) {
+           var searchUrl = '/search/';
+           var selectedIngredients = [];
+           var availableTime = 0;
+           var searchQuery = function(params){
+               return $http.get(searchUrl, {'apiRequest': true,
+                                            'ingredients': selectedIngredients,
+                                            'available_time': availableTime});
+           };
+
+           var setSearchParameters = function(ingredients, time){
+               selectedIngredients = ingredients;
+               availableTime = time;
+           };
+
+           var getSearchResults = function(){
+               var deferred = $q.defer();
+               $timeout( function(){
+                   deferred.resolve([
+                       { name: 'Chicken Parmesan',
+                         rating: '4',
+                         thumbnail: 'http://d1ujpofy5vmb70.cloudfront.net/wp-content/uploads/featured_image/GuiltlessChickenParmesan_article.jpg',
+                         cook_time: '20 mins',
+                         prep_time: '10 mins',
+                         id: 1
+                       },
+                       { name: 'Grilled Salmon',
+                         rating: '4',
+                         thumbnail: 'http://www.flavour.ca/~/media/Flavour-Hub/Recipe-Images/500x500/Club-House/grilled-salmon-asparagus-salad_500x500.ashx',
+                         cook_time: '15 mins',
+                         prep_time: '0 mins',
+                         id: 3
+                       },
+                       { name: 'Cuba Libre',
+                         rating: '1',
+                         thumbnail: 'http://i1.cpcache.com/product_zoom/68615043/cuba_libre_free_cuba_postcards_package_of_8.jpg?height=250&width=250&padToSquare=true',
+                         id: 4
+                       },
+                       { name: 'Appletini',
+                         rating: '4',
+                         thumbnail: 'http://www.mixednotstirred.net/images/products/cocktail_wine_mixes_sour_appletini_cocktail_mix.jpg',
+                         id: 5
+                       },
+                       { name: 'Chicken Parmesan',
+                         rating: '4',
+                         thumbnail: 'http://d1ujpofy5vmb70.cloudfront.net/wp-content/uploads/featured_image/GuiltlessChickenParmesan_article.jpg',
+                         cook_time: '20 mins',
+                         prep_time: '10 mins',
+                         id: 1
+                       },
+                       { name: 'Chicken Parmesan',
+                         rating: '4',
+                         thumbnail: 'http://d1ujpofy5vmb70.cloudfront.net/wp-content/uploads/featured_image/GuiltlessChickenParmesan_article.jpg',
+                         cook_time: '20 mins',
+                         prep_time: '10 mins',
+                         id: 1
+                       },
+                       { name: 'Chicken Parmesan',
+                         rating: '4',
+                         thumbnail: 'http://d1ujpofy5vmb70.cloudfront.net/wp-content/uploads/featured_image/GuiltlessChickenParmesan_article.jpg',
+                         cook_time: '20 mins',
+                         prep_time: '10 mins',
+                         id: 1
+                       }
+                   ]);
+               }, 1500);
+
+               return deferred.promise;
+           };
+
+           return {
+               setSearchParameters: setSearchParameters,
+               getSearchResults: getSearchResults
+           };
+       }]
   );
 
 /**
