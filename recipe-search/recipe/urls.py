@@ -6,7 +6,7 @@ from django.conf.urls import patterns, url, include
 from rest_framework.routers import DefaultRouter
 
 from serializers import RecipeViewSet, IngredientViewSet, \
-    RecipeSearchIngTimeViewSet
+    RecipeSearchIngTimeViewSet, RecipeRandomIngTimeViewSet
 
 router = DefaultRouter()
 router.register('recipes', RecipeViewSet)
@@ -24,6 +24,8 @@ recipe_detail = RecipeViewSet.as_view({
 })
 
 recipe_search_ingtime = RecipeSearchIngTimeViewSet.as_view()
+
+recipe_random_ingtime = RecipeRandomIngTimeViewSet.as_view()
 
 ingredient_list = IngredientViewSet.as_view({
     'get': 'list',
@@ -46,4 +48,7 @@ urlpatterns = patterns('',
     url(r'^recipes/search/ingredient_time/$', recipe_search_ingtime,
         name="recipe-search-ingtime"),
 
+    # Random recipe by ingredients and time
+    url(r'^recipes/random/ingredient_time/$', recipe_random_ingtime,
+        name="recipe-random-ingtime"),
 )

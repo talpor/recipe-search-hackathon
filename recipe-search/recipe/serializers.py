@@ -1,12 +1,52 @@
-from django.db.models import Q
+from django.db.models import Q, F
 from rest_framework import viewsets, serializers
 from rest_framework.filters import SearchFilter
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from django.db.models import Q, F
-
 from models import Recipe, Ingredient
+
+
+def search_by_time_ingredients(ingredients, time, queryset):
+    # Time intervals for the search
+    TIME_CHOICES = [(-1, 30), (30, 60), (60, 120), (120, 240), (-1, 999999)]
+
+    '''
+    Helper function to search by available ingredients and time
+    '''
+
+    recipes = queryset
+
+    # Add valid substitutes to the ingredient list
+    subs = []
+    for i in ingredients:
+        for s in Ingredient.objects.get(pk=i).substitutes.all():
+            subs.append(s.pk)
+    ingredients = ingredients + subs
+
+    # Filter by ingredients
+    recipes = recipes.filter(ingredients__ingredient__in=ingredients)
+
+    if time:
+        time = int(time)
+        lower_time = TIME_CHOICES[time][0]
+        upper_time = TIME_CHOICES[time][1]
+
+        recipes = recipes.filter(
+            (Q(cook_time__gt=lower_time - F('prep_time')) &
+             Q(cook_time__lte=upper_time - F('prep_time'))) |
+            (Q(cook_time__isnull=True) & Q(prep_time__isnull=True))
+        )
+
+    # Weed out the recipes that require at least one
+    # ingredient not in the list that is not a substitute
+    for r in recipes:
+        for i in r.ingredients.all():
+            if i.ingredient.pk not in ingredients:
+                recipes = recipes.exclude(pk=r.pk)
+                break
+
+    return recipes
 
 
 class IngredientSerializer(serializers.ModelSerializer):
@@ -85,8 +125,27 @@ class RecipeSearchIngTimeViewSet(APIView):
     Search by ingredients endpoint
     """
 
-    # Time intervals for the search
-    TIME_CHOICES = [(-1, 30), (30, 60), (60, 120), (120, 240), (-1, 999999)]
+    queryset = Recipe.objects.all()
+    serializer_class = RecipeSearchSerializer
+
+    def get(self, request, format=None):
+        # Get parameters
+        params = request.query_params
+        ingredients = [int(i) for i in params.getlist('ings')]
+        time = params.get('time')
+
+        recipes = search_by_time_ingredients(ingredients, time,
+                                             self.queryset)
+
+        return Response(self.serializer_class(
+            recipes, many=True, context={'request': request}
+        ).data)
+
+
+class RecipeRandomIngTimeViewSet(APIView):
+    """
+    Search by ingredients endpoint
+    """
 
     queryset = Recipe.objects.all()
     serializer_class = RecipeSearchSerializer
@@ -97,32 +156,11 @@ class RecipeSearchIngTimeViewSet(APIView):
         ingredients = [int(i) for i in params.getlist('ings')]
         time = params.get('time')
 
-        recipes = self.queryset
+        recipes = search_by_time_ingredients(ingredients, time,
+                                             self.queryset)
 
-        # Filter by ingredients
-        recipes = recipes.filter(
-            ingredients__ingredient__in=ingredients
-        ).distinct()
-
-        if time:
-            time = int(time)
-            lower_time = self.TIME_CHOICES[time][0]
-            upper_time = self.TIME_CHOICES[time][1]
-
-            recipes = recipes.filter(
-                (Q(cook_time__gt=lower_time - F('prep_time')) &
-                 Q(cook_time__lte=upper_time - F('prep_time'))) |
-                (Q(cook_time__isnull=True) & Q(prep_time__isnull=True))
-            )
-
-        # Weed out the recipes that require at least one
-        # ingredient not in the list
-        for r in recipes:
-            for i in r.ingredients.all():
-                if i.ingredient.pk not in ingredients:
-                    recipes = recipes.exclude(pk=r.pk)
-                    break
+        recipe = recipes.order_by('?').first()
 
         return Response(self.serializer_class(
-            recipes, many=True, context={'request': request}
+            recipe, context={'request': request}
         ).data)

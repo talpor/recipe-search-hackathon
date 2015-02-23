@@ -26,8 +26,10 @@ angular.module('RecipeSearch.controllers', ['RecipeSearch.services', 'ionic.rati
   ])
     .controller(
         'SearchRecipeCtrl',
-        ['$scope','$state', '$ionicLoading', '$ionicModal', 'Ingredients', 'Search',
-         function($scope, $state, $ionicLoading, $ionicModal, Ingredients, Search){
+        ['$scope','$state', '$popup', '$ionicLoading', '$ionicModal', 'Ingredients',
+         'Search',
+         function($scope, $state, $popup, $ionicLoading, $ionicModal, Ingredients,
+                  Search){
              $scope.loadingIndicator = $ionicLoading.show({
 	         content: 'Loading Ingredients',
 	         animation: 'fade-in',
@@ -77,7 +79,22 @@ angular.module('RecipeSearch.controllers', ['RecipeSearch.services', 'ionic.rati
              };
 
              $scope.getRandomRecipe = function(){
-                 $state.go('recipe', {'recipeId': 1});
+                 $ionicLoading.show({
+	             content: 'Loading Random Recipe',
+	             animation: 'fade-in',
+	             showBackdrop: true,
+                 });
+                 Search.getRandomFromSearch(
+                     $scope.selectedIngredients,
+                     $scope.availableTime
+                 ).then(function(response){
+                     $ionicLoading.hide();
+                     if(response.data.id !== undefined){
+                         $state.go('recipe', {'recipeId': response.data.id});
+                     }else{
+                         $popup.alert('No matching recipe was found','Not Found');
+                     }
+                 });
              };
 
              $scope.showSearchResults = function(){
@@ -122,7 +139,7 @@ angular.module('RecipeSearch.controllers', ['RecipeSearch.services', 'ionic.rati
                  function(response){
                      $scope.recipe = response.data;
                      // TODO: Do this on the server
-                     $scope.recipe.instructions = JSON.parse($scope.recipe.instructions.replace(/u\'/g, "'").replace(/\'/g, "\"").replace(/\\xa0/g, ""));
+                     $scope.recipe.instructions = JSON.parse($scope.recipe.instructions.replace(/u\'/g, "'").replace(/\'/g, "\"").replace(/\\x../g, ""));
                      $ionicLoading.hide();
                  }
              );

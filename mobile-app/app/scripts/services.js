@@ -35,6 +35,7 @@ angular.module('RecipeSearch.services', ['settings'])
       ['$http', '$q', '$timeout',
        function($http, $q, $timeout) {
            var searchUrl = 'recipes/search/ingredient_time/';
+           var randomUrl = 'recipes/random/ingredient_time/';
            var selectedIngredients = [];
            var availableTime = 0;
            var searchQuery = function(){
@@ -43,6 +44,15 @@ angular.module('RecipeSearch.services', ['settings'])
                                'params': {
                                    'ings':_.pluck(selectedIngredients, 'id'),
                                    'time': availableTime
+                               }});
+           };
+
+           var getRandomRecipe = function(ingredients, time){
+               return $http.get(
+                   randomUrl, {'apiRequest': true,
+                               'params': {
+                                   'ings':_.pluck(ingredients, 'id'),
+                                   'time': time
                                }});
            };
 
@@ -109,7 +119,8 @@ angular.module('RecipeSearch.services', ['settings'])
            return {
                setSearchParameters: setSearchParameters,
                searchQuery: searchQuery,
-               getSearchResults: getSearchResults
+               getSearchResults: getSearchResults,
+               getRandomFromSearch: getRandomRecipe
            };
        }]
   ).factory(
