@@ -33,17 +33,17 @@ angular.module("settings", [])
     "left": "0%"
   },
   "ENV": {
-    "name": "staging"
+    "name": "development"
   },
   "facebook": {
-    "appID": "355959317904395"
+    "appID": "352723474894646"
   },
   "apiEndpoint": {
-    "url": "https://api.gotcrowdy.com"
+    "url": "http://localhost:8000"
   },
   "wsService": {
-    "url": "https://api.gotcrowdy.com/ws",
-    "pingUmbral": 100,
+    "url": "http://localhost:9999/ws",
+    "pingUmbral": 10,
     "queryFrequency": 10000
   }
 })

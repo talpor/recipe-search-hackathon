@@ -2,10 +2,11 @@
 <ion-view title="Search Results">
   <ion-content has-bouncing="false" class="has-header">
     <ion-list class="recipe-list">
-      <a href="#/recipe/{{recipe.id}}" class="item item-thumbnail-left" ng-repeat="recipe in recipes">
-        <img src="{{ recipe.thumbnail }}"/>
+      <a ui-sref='recipe({recipeId: recipe.id})' class="item item-thumbnail-left" ng-repeat="recipe in recipes">
+        <img ng-if="recipe.thumbnail != null" src="{{ recipe.thumbnail }}"/>
+        <img ng-if="recipe.thumbnail == null" src="http://www.petsgo.com.au/assets/themes/sherwood/img/default_product.gif"/>
         <h2>{{ recipe.name }}</h2>
-        <rating ng-model="recipe.rating" max="5"></rating>
+        <rating ng-model="recipe.rating" max="5" data-readonly="1"></rating>
         <p ng-if="recipe.cook_time">Cook Time: {{ recipe.cook_time }}</p>
         <p ng-if="recipe.prep_time">Prep Time: {{ recipe.prep_time }}</p>
       </a>

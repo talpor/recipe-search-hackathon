@@ -40,9 +40,9 @@ angular.module('RecipeSearch.controllers', ['RecipeSearch.services', 'ionic.rati
              $scope.selectedIngredients = [];
              $scope.searchTerm = '';
 
-             Ingredients.getAll($scope.search_term).then(
-                 function(ingredients){
-                     $scope.allIngredients = ingredients;
+             Ingredients.query().then(
+                 function(response){
+                     $scope.allIngredients = response.data;
                      $ionicLoading.hide();
                  }
              );
@@ -76,10 +76,14 @@ angular.module('RecipeSearch.controllers', ['RecipeSearch.services', 'ionic.rati
                  _.pull($scope.selectedIngredients, ingredient);
              };
 
+             $scope.getRandomRecipe = function(){
+                 $state.go('recipe', {'recipeId': 1});
+             };
+
              $scope.showSearchResults = function(){
                  Search.setSearchParameters($scope.selectedIngredients,
                                             $scope.availableTime);
-                 $state.go('search-results');
+                 $state.go('results');
              };
          }]
     )
@@ -94,9 +98,31 @@ angular.module('RecipeSearch.controllers', ['RecipeSearch.services', 'ionic.rati
 	     });
 
              $scope.recipes = [];
-             Search.getSearchResults().then(
-                 function(recipes){
-                     $scope.recipes = recipes;
+             Search.searchQuery().then(
+                 function(response){
+                     $scope.recipes = response.data;
+                     $ionicLoading.hide();
+                 }
+             );
+         }]
+    )
+    .controller(
+        'RecipeDetailCtrl',
+        ['$scope', '$stateParams', '$ionicLoading', 'Recipe',
+         function($scope, $stateParams, $ionicLoading, Recipe){
+             $scope.loadingIndicator = $ionicLoading.show({
+	         content: 'Loading Recipe',
+	         animation: 'fade-in',
+	         showBackdrop: true,
+	     });
+
+             $scope.recipe = {};
+
+             Recipe.getById($stateParams.recipeId).then(
+                 function(response){
+                     $scope.recipe = response.data;
+                     // TODO: Do this on the server
+                     $scope.recipe.instructions = JSON.parse($scope.recipe.instructions.replace(/u\'/g, "'").replace(/\'/g, "\"").replace(/\\xa0/g, ""));
                      $ionicLoading.hide();
                  }
              );

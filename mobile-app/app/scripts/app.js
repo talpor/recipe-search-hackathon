@@ -45,15 +45,20 @@
   .config(['$stateProvider', '$urlRouterProvider', '$httpProvider', function($stateProvider, $urlRouterProvider, $httpProvider) {
 
     $stateProvider
-      .state('search-recipe', {
+      .state('search', {
           url: '/recipe/search/',
           templateUrl: 'templates/recipe_search.html',
           controller: 'SearchRecipeCtrl'
       })
-      .state('search-results', {
+      .state('results', {
           url: '/recipe/search-results/',
           templateUrl: 'templates/search_results.html',
           controller: 'SearchResultsCtrl'
+      })
+      .state('recipe', {
+          url: '/recipe/{recipeId}',
+          templateUrl: 'templates/recipe_detail.html',
+          controller: 'RecipeDetailCtrl'
       });
 
     // if none of the above states are matched, use this as the fallback

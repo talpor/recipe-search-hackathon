@@ -8,9 +8,8 @@ angular.module('RecipeSearch.services', ['settings'])
       ['$http', '$q', '$timeout',
        function($http, $q, $timeout) {
            var ingredientsUrl = '/ingredients/';
-           var queryIngredients = function(params){
-               return $http.get(ingredientsUrl, {'apiRequest': true,
-                                                 'params': params});
+           var queryIngredients = function(){
+               return $http.get(ingredientsUrl, {'apiRequest': true});
            };
            var getAllIngredients = function(){
                var deferred = $q.defer();
@@ -35,13 +34,16 @@ angular.module('RecipeSearch.services', ['settings'])
     .factory('Search',
       ['$http', '$q', '$timeout',
        function($http, $q, $timeout) {
-           var searchUrl = '/search/';
+           var searchUrl = 'recipes/search/ingredient_time/';
            var selectedIngredients = [];
            var availableTime = 0;
-           var searchQuery = function(params){
-               return $http.get(searchUrl, {'apiRequest': true,
-                                            'ingredients': selectedIngredients,
-                                            'available_time': availableTime});
+           var searchQuery = function(){
+               return $http.get(
+                   searchUrl, {'apiRequest': true,
+                               'params': {
+                                   'ings':_.pluck(selectedIngredients, 'id'),
+                                   'time': availableTime
+                               }});
            };
 
            var setSearchParameters = function(ingredients, time){
@@ -106,7 +108,21 @@ angular.module('RecipeSearch.services', ['settings'])
 
            return {
                setSearchParameters: setSearchParameters,
+               searchQuery: searchQuery,
                getSearchResults: getSearchResults
+           };
+       }]
+  ).factory(
+      'Recipe',
+      ['$http',
+       function($http){
+           var recipeUrl = 'recipes/';
+           var getById = function(recipeId){
+               return $http.get(recipeUrl+recipeId+'/', {'apiRequest': true});
+           };
+
+           return {
+               getById: getById
            };
        }]
   );

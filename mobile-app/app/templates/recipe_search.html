@@ -1,8 +1,8 @@
 <!-- The title of the ion-view will be shown on the navbar -->
 <ion-view title="Recipe Search" hide-back-button="true">
   <ion-content has-bouncing="false" class="has-header">
-    <div class="item item-input-inset row ingredient-search">
-      <span class="col-80">Available Ingredients</span>
+    <div class="item-input-inset row ingredient-search">
+      <h4 class="col-80">Available Ingredients</h4>
       <a class="ion-plus-circled col-offset-10" ng-click="showModal()"></a>
     </div>
     <ion-list>
@@ -15,8 +15,8 @@
     </ion-list>
   </ion-content>
   <ion-footer-bar align-title="left" class="bar-footer">
-    <div class="row item">
-      <span class="col">How much time do you have?</span>
+    <div class="row">
+      <h4 class="col">How much time do you have?</h4>
     </div>
     <div class="row time_tabs">
         <ion-radio ng-model="availableTime" ng-value="0" class="col-20">
@@ -62,7 +62,7 @@
       </div>
       <div id="buttons_row" class="row">
         <div id="random_col" class="col">
-          <button class="action_button button button-block button-positive">Random</button>
+          <button class="action_button button button-block button-positive" ng-click="getRandomRecipe()">Random</button>
         </div>
         <div id="search_col" class="col">
           <button class="action_button button button-block" ng-click="showSearchResults()">Search</button>
@@ -73,7 +73,7 @@
 
 <script id="ingredient-modal.html" type="text/ng-template">
   <div class="modal">
-    <ion-header-bar class="bar-positive">
+    <ion-header-bar class="bar-energized">
       <h1 class="title">Add Ingredient</h1>
     </ion-header-bar>
     <ion-content has-bouncing="false">

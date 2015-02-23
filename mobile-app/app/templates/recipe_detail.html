@@ -1,0 +1,37 @@
+<!-- The title of the ion-view will be shown on the navbar -->
+<ion-view title="{{ recipe.name }}">
+  <ion-content has-bouncing="false" class="has-header">
+    <div class="list card">
+      <div class="item item-text-wrap">
+        <h2>{{ recipe.name }}</h2>
+        <p ng-if="recipe.cook_time">Cook Time: {{ recipe.cook_time }}</p>
+        <p ng-if="recipe.prep_time">Prep Time: {{ recipe.prep_time }}</p>
+      </div>
+
+      <div class="item item-image">
+        <img ng-if="recipe.image != null" src="{{ recipe.image }}"/>
+        <img ng-if="recipe.image == null" src="http://www.petsgo.com.au/assets/themes/sherwood/img/default_product.gif"/>
+      </div>
+    </div>
+
+    <div class="list card">
+      <div class="item item-text-wrap">
+        <h3 ng-if="recipe.description">Description</h3>
+        <p ng-if="recipe.description">{{ recipe.description }}</p>
+        <h3>Ingredients</h3>
+        <ul>
+          <li ng-repeat="ingredient in recipe.ingredients">
+            - {{ ingredient.quantity }} <span ng-if="ingredient.unit">{{ ingredient.unit }}</span> of {{ ingredient.ingredient.name }}
+          </li>
+        </ul>
+        <br/>
+        <h3>Instructions</h3>
+        <ol>
+          <li ng-repeat="instruction in recipe.instructions.instructions">
+            {{ instruction }}
+          </li>
+        </ol>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

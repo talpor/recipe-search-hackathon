@@ -57,13 +57,15 @@ class IngredientEntry(models.Model):
 
 class Recipe(models.Model):
     name = models.CharField(max_length=128, unique=True)
-    categories = models.ManyToManyField('Category')
-    description = models.TextField(null=True)
-    ingredients = models.ManyToManyField('IngredientEntry')
+    categories = models.ManyToManyField('Category', null=True, blank=True)
+    description = models.TextField(null=True, blank=True)
+    ingredients = models.ManyToManyField('IngredientEntry', null=True,
+                                         blank=True)
     prep_time = models.PositiveSmallIntegerField(null=True)
     cook_time = models.PositiveSmallIntegerField(null=True)
+    image = models.FileField(upload_to='recipe_images', null=True)
     instructions = JSONField(null=True)
-    notes = JSONField(null=True)
+    notes = JSONField(null=True, blank=True)
 
     def __unicode__(self):
         return "%s" % self.name
